@@ -48,6 +48,5 @@
             User 4
         </div>
     </div>
-    
     <h5>Free parking spots: ${numberOfFreeParkingSpots}</h5>
 </t:pageTemplate>
