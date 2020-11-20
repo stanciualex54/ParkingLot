@@ -6,8 +6,10 @@
 package com.park.parkinglot.ejb;
 
 import com.park.parkinglot.common.CarDetails;
+import com.park.parkinglot.entity.User;
 import com.park.parkinglot.entity.car;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJBException;
@@ -28,7 +30,11 @@ public class CarBean {
     private EntityManager em;
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-
+    public CarDetails findById(Integer carId){
+        car car = em.find(car.class, carId);
+        return new CarDetails(car.getId(), car.getLicensePlate(), car.getParkingSpot(), car.getUser().getUsername());
+    
+    }
     public List<CarDetails> getAllCars() {
         LOG.info("getAllCars");
         try {
@@ -51,5 +57,41 @@ public class CarBean {
             detailsList.add(carDetails);
         }
         return detailsList;
+    }
+    
+    public void createCar(String licensePlate, String parkingSpot, Integer userId){
+        LOG.info("createCar");
+        car car = new car();
+        car.setLicensePlate(licensePlate);
+        car.setParkingSpot(parkingSpot);
+    
+        User user = em.find(User.class, userId);
+        user.getCars().add(car);
+        car.setUser(user);
+        
+        em.persist(car);
+    
+    }
+
+    public void updateCar(Integer carId, String licensePlate, String parkingSpot, Integer userId) {
+        LOG.info("updateCar");
+        car car = em.find(car.class, carId);
+        car.setLicensePlate(licensePlate);;
+        car.setParkingSpot(parkingSpot);
+        
+        User oldUser = car.getUser();
+        oldUser.getCars().remove(car);
+        
+        User user = em.find(User.class, userId);
+        user.getCars().add(car);
+        car.setUser(user);
+    }
+
+    public void deleteCarsByIds(Collection<Integer> ids) {
+        LOG.info("deleteCarsByIds");
+        for(Integer id : ids){
+            car car = em.find(car.class, id);
+            em.remove(car);
+        }
     }
 }
