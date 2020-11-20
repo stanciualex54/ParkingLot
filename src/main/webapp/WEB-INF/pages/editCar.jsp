@@ -7,7 +7,7 @@
     <h1>Add Car</h1>
     <form class="needs-validation container" novalidate method="POST" action="${pageContext.request.contextPath}/EditCar">
         <div class="row">
-            <div class="col-mi-6 mb-3">
+            <div class="col-md-6 mb-3">
                 <label for="license_plate">License plate</label> 
                 <input type="text" class="form-control" id="license_plate" name="license_plate" placeholder="License plate" required value="${car.licensePlate}" />
                 <div class="invalid-feedback">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-mi-6 mb-3">
+            <div class="col-md-6 mb-3">
                 <label for="parking_spot">Parking spot</label> 
                 <input type="text" class="form-control" id="parking_spot" name="parking_spot" placeholder="Parking spot" required value="${car.parkingSpot}" />
                 <div class="invalid-feedback">
@@ -25,7 +25,7 @@
             </div>
         </div> 
         <div class="row">
-            <div class="col-mi-6 mb-3">
+            <div class="col-md-6 mb-3">
                 <label for="owner_id">Owner id</label> 
                 <select class="custom-select d-block w-100" id="owner_id" name="owner_id" required>
                     <option value="">Choose...</option>
