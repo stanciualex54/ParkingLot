@@ -76,7 +76,7 @@ public class CarBean {
     public void updateCar(Integer carId, String licensePlate, String parkingSpot, Integer userId) {
         LOG.info("updateCar");
         car car = em.find(car.class, carId);
-        car.setLicensePlate(licensePlate);;
+        car.setLicensePlate(licensePlate);
         car.setParkingSpot(parkingSpot);
         
         User oldUser = car.getUser();
