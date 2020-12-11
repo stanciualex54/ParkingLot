@@ -6,15 +6,11 @@
 package com.park.parkinglot.entity;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -22,62 +18,53 @@ import javax.persistence.OneToOne;
  * @author Alex
  */
 @Entity
-@Table(name = "CARS")
-public class car implements Serializable {
+public class Photo implements Serializable {
 
+    
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
-    private String licensePlate;
-    private String parkingSpot;
 
-    public car() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getFilename() {
+        return filename;
     }
 
-    public String getLicensePlate() {
-        return licensePlate;
+    public String getFileType() {
+        return fileType;
     }
 
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
+    public byte[] getFileContent() {
+        return fileContent;
     }
 
-    public String getParkingSpot() {
-        return parkingSpot;
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
-    public void setParkingSpot(String parkingSpot) {
-        this.parkingSpot = parkingSpot;
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setFileContent(byte[] fileContent) {
+        this.fileContent = fileContent;
     }
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_KEY")
-    private User user;
+    private String filename;
+    private String fileType;
+    private byte[] fileContent;
+    
+    @OneToOne
+    @JoinColumn(name = "CAR_KEY")
+    private car car;
 
-    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Photo photo;
-
-    public void setPhoto(Photo photo) {
-        this.photo = photo;
+    public void setCar(car car) {
+        this.car = car;
     }
 
-    public Photo getPhoto() {
-        return photo;
-    }
-
-    public car(Photo photo) {
-        this.photo = photo;
+    public car getCar() {
+        return car;
     }
     
     public Integer getId() {
@@ -98,10 +85,10 @@ public class car implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof car)) {
+        if (!(object instanceof Photo)) {
             return false;
         }
-        car other = (car) object;
+        Photo other = (Photo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -110,7 +97,7 @@ public class car implements Serializable {
 
     @Override
     public String toString() {
-        return "com.park.parkinglot.entity.car[ id=" + id + " ]";
+        return "com.park.parkinglot.entity.Photo[ id=" + id + " ]";
     }
     
 }
