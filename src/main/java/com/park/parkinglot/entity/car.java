@@ -33,9 +33,7 @@ public class car implements Serializable {
     private String licensePlate;
     private String parkingSpot;
 
-    public car() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     public String getLicensePlate() {
         return licensePlate;
@@ -74,10 +72,6 @@ public class car implements Serializable {
 
     public Photo getPhoto() {
         return photo;
-    }
-
-    public car(Photo photo) {
-        this.photo = photo;
     }
     
     public Integer getId() {

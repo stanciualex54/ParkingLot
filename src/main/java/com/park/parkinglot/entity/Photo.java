@@ -12,12 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Alex
  */
+
 @Entity
+@Table(name = "PHOTOS")
 public class Photo implements Serializable {
 
     
@@ -26,7 +29,11 @@ public class Photo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
+    
+    private String filename;
+    private String fileType;
+    private byte[] fileContent;
+    
     public String getFilename() {
         return filename;
     }
@@ -51,9 +58,7 @@ public class Photo implements Serializable {
         this.fileContent = fileContent;
     }
     
-    private String filename;
-    private String fileType;
-    private byte[] fileContent;
+    
     
     @OneToOne
     @JoinColumn(name = "CAR_KEY")

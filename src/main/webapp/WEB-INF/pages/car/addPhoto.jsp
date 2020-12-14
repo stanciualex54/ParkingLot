@@ -8,13 +8,13 @@
     <form class="needs-validation" novalidate method="POST" enctype="multipart/form-data" action="${pageContext.request.contextPath}/Cars/AddPhoto">
         <div class="row">
             <div class="col-md-6 mb-3">
-               License plate: ${car.licensePlate}
+               License plate: ${car.licensePlate};
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="file">Photo</label>
-                <input type="file" name="file" required>
+                <input type="file" name="file" required />
                 <div class="invalid-feedback">
                     Photo is required.
                 </div>
